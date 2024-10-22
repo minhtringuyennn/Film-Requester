@@ -1,0 +1,35 @@
+name: code_quality
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+
+      - name: Get yarn cache directory
+        id: yarn-cache-dir
+        run: echo "YARN_CACHE=$(yarn cache dir)" >> $GITHUB_ENV
+
+      - name: Setup yarn cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.YARN_CACHE }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies and run lint and typecheck
+        run: |
+          yarn install
+          yarn lint

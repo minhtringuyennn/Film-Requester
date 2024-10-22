@@ -1,0 +1,29 @@
+printWidth: 100
+tabWidth: 2
+singleQuote: true
+semi: true
+jsxSingleQuote: true
+quoteProps: as-needed
+trailingComma: none
+bracketSpacing: true
+bracketSameLine: false
+endOfLine: lf
+importOrder:
+  - '^(react/(.*)$)|^(react$)'
+  - '<THIRD_PARTY_MODULES>'
+  - ''
+  - '^app/(.*)$'
+  - ''
+  - '^components/(.*)$'
+  - '^hooks/(.*)$'
+  - '^lib/(.*)$'
+  - '^stores/(.*)$'
+  - ''
+  - '^[./]'
+importOrderParserPlugins:
+  - 'typescript'
+  - 'jsx'
+  - 'decorators-legacy'
+plugins:
+  - '@ianvs/prettier-plugin-sort-imports'
+  - 'prettier-plugin-tailwindcss'
